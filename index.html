@@ -31,21 +31,92 @@
     <!-- Header  -->
     <header class="header" id="header">Weather Dashboard</header>
 
-    <main id="main" class="main"></main>
-    <!--Aside form and search history-->
-    <aside class="history" id="history">
-      <form id="city-search">
-        <input type="text" id="enter-city" />
-        <input type="submit" id="submit-button" class="submit-button" />
-      </form>
-      <div class="search-history" id="search-history">
-        <div class="">city 1</div>
-        <div class="">city 2</div>
-        <div class="">city 3</div>
-      </div>
-    </aside>
-    <section class="Weather-content" id="Weather-content">hello</section>
-
+    <main class="main row border" id="main">
+      <!--Aside form and search history-->
+      <aside class="history border col-sm-12 col-md-3" id="history">
+        <form id="city-search">
+          <input type="text" id="enter-city" />
+          <input type="submit" id="submit-button" class="submit-button" />
+        </form>
+        <div class="search-history" id="search-history">
+          <div class="">city 1</div>
+          <div class="">city 2</div>
+          <div class="">city 3</div>
+        </div>
+      </aside>
+      <section
+        class="Weather-content border col-sm-12 col-md-9"
+        id="Weather-content"
+      >
+        <div>current weather</div>
+        <div>
+          <h2>future prediction</h2>
+          <div class="d-flex flex-wrap justify-content-between">
+            <!-- div for first card -->
+            <div class="card" style="width: 12rem">
+              <img class="card-img-top" src="..." alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <!--  div for second card-->
+            <div class="card" style="width: 12rem">
+              <img class="card-img-top" src="..." alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <!--  div for 3rd card -->
+            <div class="card" style="width: 12rem">
+              <img class="card-img-top" src="..." alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <!-- div for 4th card -->
+            <div class="card" style="width: 12rem">
+              <img class="card-img-top" src="..." alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <!-- div for 5th card-->
+            <div class="card" style="width: 12rem">
+              <img class="card-img-top" src="..." alt="Card image cap" />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <!-- card div ends here -->
+          </div>
+        </div>
+      </section>
+    </main>
     <!-- link to libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
