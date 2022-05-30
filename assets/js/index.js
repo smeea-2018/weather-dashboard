@@ -25,8 +25,22 @@ const handleFormSubmit = () => {
   // if empty
   // render weather data
 };
+
+const getFromLocalStorage = (key, defaultValue) => {
+  const dataFromLS = localStorage.getItem(key);
+
+  const parsedData = JSON.stringify(dataFromLS);
+
+  if (parsedData) {
+    return parsedData;
+  } else {
+    return defaultValue;
+  }
+};
 const onReady = () => {
   // render recent cities
+  const recentSearchContainer = $("#recent-search");
+  const recentSearches = getFromLocalStorage("recentSearches", []);
 };
 // on load
 $(document).ready(onReady);
