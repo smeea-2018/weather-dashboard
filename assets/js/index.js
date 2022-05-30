@@ -41,6 +41,13 @@ const onReady = () => {
   // render recent cities
   const recentSearchContainer = $("#recent-search");
   const recentSearches = getFromLocalStorage("recentSearches", []);
+  if (recentSearches.length) {
+  } else {
+    const alert = `<div class="alert alert-info" role="alert">
+          Data has not been found. Please enter the city.
+        </div>`;
+    recentSearchContainer.append(alert);
+  }
 };
 // on load
 $(document).ready(onReady);
