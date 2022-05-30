@@ -1,8 +1,28 @@
+const recentSearchContainer = $("#recent-search");
 const renderCities = () => {
   // Get recent cities [] form LS
-  //If empty render alert
-  // else render recent cities
-  //   Add event listener to div containing all cities
+  const recentSearches = getFromLocalStorage("recentSearches", []);
+  recentSearches = ["london"];
+  //If past search exists render cities
+  if (recentSearches.length) {
+    const createRecentCity = (city) => {
+      return `<li class="list-group-item" data-city="${city}">
+          ${city}
+        </li>`;
+    };
+    const recentCities = recentSearches.map(createRecentCity).join("");
+    const ul = `<ul class="list-group">
+            ${recentCities}
+          </ul>`;
+    recentSearchContainer.append(ul);
+  }
+  // else render alert
+  else {
+    const alert = `<div class="alert alert-info" role="alert">
+          Data has not been found. Please enter the city.
+        </div>`;
+    recentSearchContainer.append(alert);
+  }
 };
 
 const renderWeatherData = (cityName) => {
@@ -39,15 +59,16 @@ const getFromLocalStorage = (key, defaultValue) => {
 };
 const onReady = () => {
   // render recent cities
-  const recentSearchContainer = $("#recent-search");
-  const recentSearches = getFromLocalStorage("recentSearches", []);
-  if (recentSearches.length) {
-  } else {
-    const alert = `<div class="alert alert-info" role="alert">
-          Data has not been found. Please enter the city.
-        </div>`;
-    recentSearchContainer.append(alert);
+  renderCities();
+};
+const handleSearchClick = (event) => {
+  const target = $(event.target);
+
+  if (target.is("li")) {
+    const cityName = target.attr("data-city");
   }
 };
+
+recentSearchContainer.click(handleSearchClick);
 // on load
 $(document).ready(onReady);
