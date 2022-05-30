@@ -29,19 +29,35 @@
   </head>
   <body>
     <!-- Header  -->
-    <header class="header" id="header">Weather Dashboard</header>
+    <header class="header text-center" id="header">Weather Dashboard</header>
 
-    <main class="main row border" id="main">
+    <main class="main row border g-0" id="main">
       <!--Aside form and search history-->
       <aside class="history border col-sm-12 col-md-3" id="history">
         <form id="city-search">
-          <input type="text" id="enter-city" />
-          <input type="submit" id="submit-button" class="submit-button" />
+          <div class="mb-3">
+            <h3 class="mb-2">Search for a City:</h3>
+            <input
+              type="text"
+              class="form-control"
+              id="enter-city"
+              placeholder="Enter city name"
+              aria-describedby="searchCity"
+            />
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
         </form>
+
         <div class="search-history" id="search-history">
-          <div class="">city 1</div>
-          <div class="">city 2</div>
-          <div class="">city 3</div>
+          <ul class="list-group">
+            <li class="list-group-item active">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
         </div>
       </aside>
       <section
