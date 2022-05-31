@@ -24,7 +24,7 @@ const writeToLocalStorage = (key, value) => {
 };
 const renderCities = () => {
   // Get recent cities [] form LS
-  //const recentSearches = getFromLocalStorage("recentSearches", []);
+  //const recentSearches = getFromLocalStorage("recentSearches", "");
 
   const recentSearches = ["london", "leeds"];
   console.log(recentSearches);
