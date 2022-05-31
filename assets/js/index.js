@@ -1,8 +1,9 @@
+// target html elements
 const recentSearchContainer = $("#recent-search");
+const searchForm = $("city-search-form");
 const renderCities = () => {
   // Get recent cities [] form LS
   const recentSearches = getFromLocalStorage("recentSearches", []);
-  recentSearches = ["london"];
   //If past search exists render cities
   if (recentSearches.length) {
     const createRecentCity = (city) => {
@@ -40,9 +41,20 @@ const renderCurrentWeather = (currentWeatherData) => {
 const renderForecastWeather = (forecastWeatherData) => {
   // render forecast weather data and append  each card to the section
 };
-const handleFormSubmit = () => {
+const handleFormSubmit = (event) => {
+  event.preventDefault();
   // get city name from input
-  // if empty
+  const cityName = $("#city-name").value();
+  // if  not empty
+  if (cityName) {
+    const recentSearches = getFromLocalStorage("recentSearches", []);
+    recentSearches.push(cityName);
+    writeToLocalStorage("recentSearches", recentSearches);
+    // remove last section
+    recentSearchContainer.children().last().remove();
+    // rerender recent cities
+    renderCities();
+  }
   // render weather data
 };
 
@@ -57,6 +69,11 @@ const getFromLocalStorage = (key, defaultValue) => {
     return defaultValue;
   }
 };
+
+const writeToLocalStorage = (key, value) => {
+  const stringifiedValue = JSON.stringify(value);
+  localStorage.setItem(stringifiedValue);
+};
 const onReady = () => {
   // render recent cities
   renderCities();
@@ -70,5 +87,7 @@ const handleSearchClick = (event) => {
 };
 
 recentSearchContainer.click(handleSearchClick);
+
+searchForm.submit(handleFormSubmit);
 // on load
 $(document).ready(onReady);
