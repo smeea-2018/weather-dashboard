@@ -8,9 +8,10 @@ const removeAlert = $("#alert-ul");
 const getFromLocalStorage = (key, defaultValue) => {
   const dataFromLS = localStorage.getItem(key);
 
-  const parsedData = JSON.stringify(dataFromLS);
+  const parsedData = JSON.parse(dataFromLS);
 
   if (parsedData) {
+    console.log("parsedData", parsedData);
     return parsedData;
   } else {
     return defaultValue;
@@ -20,15 +21,12 @@ const getFromLocalStorage = (key, defaultValue) => {
 // write to LS
 const writeToLocalStorage = (key, value) => {
   const stringifiedValue = JSON.stringify(value);
-  localStorage.setItem(stringifiedValue);
+  localStorage.setItem(key, stringifiedValue);
 };
 const renderCities = () => {
   // Get recent cities [] form LS
-  //const recentSearches = getFromLocalStorage("recentSearches", "");
+  const recentSearches = getFromLocalStorage("recentSearches", []);
 
-  const recentSearches = ["london", "leeds"];
-  console.log(recentSearches);
-  console.log(recentSearches.length);
   //If past search exists render cities
   if (recentSearches.length) {
     const createRecentCity = (city) => {
@@ -41,6 +39,7 @@ const renderCities = () => {
     const ul = `<ul class="list-group">
             ${recentCities}
           </ul>`;
+    recentSearchContainer.empty();
     recentSearchContainer.append(ul);
   }
   // else render alert
@@ -80,7 +79,7 @@ const renderCurrentData = () => {
             </div>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">Humidity:</div>
-              <div class="col-sm-12 col-md-8 p-2">0&percnt;</div>
+              <div class="col-sm-12 col-md-8 p-2">0&percent;</div>
             </div>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">UV Index:</div>
@@ -110,11 +109,15 @@ const handleFormSubmit = (event) => {
   if (cityName) {
     renderCurrentData();
     const recentSearches = getFromLocalStorage("recentSearches", []);
-    recentSearches.push(cityName);
+    console.log("recentSearches", recentSearches);
+    if (!recentSearches.includes(cityName)) {
+      recentSearches.push(cityName);
+    }
     writeToLocalStorage("recentSearches", recentSearches);
     // remove last section
     removeAlert.remove();
     //recentSearchContainer.children().last().remove();
+
     // rerender recent cities
     renderCities();
   }
