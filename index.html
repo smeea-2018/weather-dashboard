@@ -61,9 +61,9 @@
             <li class="list-group-item" data-city="Coventry">Coventry</li>
           </ul> -->
         </div>
-        <div class="alert alert-info" role="alert">
+        <!-- <div class="alert alert-info" role="alert" id="alert-ul">
           Data has not been found. Please enter the city.
-        </div>
+        </div> -->
       </aside>
       <!-- Current and Future Weather -->
       <section
@@ -71,37 +71,38 @@
         id="Weather-content"
       >
         <!-- Current Weather  -->
-        <div class="current-weather">
-          <h2>
-            Birmingham 20/05/2022 weather icon
-            <img
-              class="bg-light border rounded"
-              src="http://openweathermap.org/img/w/04d.png"
-              alt="weather icon"
-            />
-          </h2>
-          <!-- Weather Metrics -->
-          <div class="row g-0">
-            <div class="col-sm-12 col-md-4 p-2">Temp:</div>
-            <div class="col-sm-12 col-md-8 p-2">16&deg;c</div>
-          </div>
-          <div class="row g-0">
-            <div class="col-sm-12 col-md-4 p-2">Wind:</div>
-            <div class="col-sm-12 col-md-8 p-2">10 MPH</div>
-          </div>
-          <div class="row g-0">
-            <div class="col-sm-12 col-md-4 p-2">Humidity:</div>
-            <div class="col-sm-12 col-md-8 p-2">0&percnt;</div>
-          </div>
-          <div class="row g-0">
-            <div class="col-sm-12 col-md-4 p-2">UV Index:</div>
-
-            <div class="col-sm-12 col-md-8 p-2">
-              <span class="bg-success text-white rounded-2"> 1.5</span>
+        <div class="col-sm-12 col-md-9" id="weather-info-container">
+          <!-- <div class="current-weather">
+            <h2>
+              Birmingham 20/05/2022 weather icon
+              <img
+                class="bg-light border rounded"
+                src="http://openweathermap.org/img/w/04d.png"
+                alt="weather icon"
+              />
+            </h2>
+            <div class="row g-0">
+              <div class="col-sm-12 col-md-4 p-2">Temp:</div>
+              <div class="col-sm-12 col-md-8 p-2">16&deg;c</div>
             </div>
-          </div>
+            <div class="row g-0">
+              <div class="col-sm-12 col-md-4 p-2">Wind:</div>
+              <div class="col-sm-12 col-md-8 p-2">10 MPH</div>
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 col-md-4 p-2">Humidity:</div>
+              <div class="col-sm-12 col-md-8 p-2">0&percnt;</div>
+            </div>
+            <div class="row g-0">
+              <div class="col-sm-12 col-md-4 p-2">UV Index:</div>
+
+              <div class="col-sm-12 col-md-8 p-2">
+                <span class="bg-success text-white rounded-2"> 1.5</span>
+              </div>
+            </div>
+          </div> -->
         </div>
-        <!--closing div current-weather-->
+
         <!-- Future Weather -->
         <div>
           <h4 class="my-3 fw-bold">5-day Forecast:</h4>
