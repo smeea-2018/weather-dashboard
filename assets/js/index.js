@@ -1,3 +1,4 @@
+const apikey = "96422e192460c3c4fca4e0c2b5ee0a5c";
 // target html elements
 const recentSearchContainer = $("#recent-search");
 const searchForm = $("#city-search-form");
@@ -23,6 +24,36 @@ const writeToLocalStorage = (key, value) => {
   const stringifiedValue = JSON.stringify(value);
   localStorage.setItem(key, stringifiedValue);
 };
+
+const constructUrl = (baseUrl, params) => {
+  const queryParams = new URLSearchParams(params).toString();
+
+  return queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
+};
+
+const fetchData = async (url, options = {}) => {
+  try {
+    const response = await fetch(url, options);
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error("Failed to fetch data");
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const currentDataurl = constructUrl(
+  " https://api.openweathermap.org/data/2.5/weather?",
+  {
+    q: "london",
+    type: "8109f605d79877f7488a194794a29013",
+  }
+);
+
 const renderCities = () => {
   // Get recent cities [] form LS
   const recentSearches = getFromLocalStorage("recentSearches", []);
@@ -51,40 +82,71 @@ const renderCities = () => {
   }
 };
 
-const renderWeatherData = (cityName) => {
+const renderWeatherData = async (cityName) => {
+  const currentDataUrl = constructUrl(
+    "https://api.openweathermap.org/data/2.5/weather?",
+    {
+      q: "london",
+      type: "8109f605d79877f7488a194794a29013",
+    }
+  );
+
+  const currentData = await fetchData(currentDataUrl);
+  //render lat , long and city Name
+  const lat = currentData?.coord?.lat;
+  const lon = currentData?.coord?.lon;
+  const displayCity = currentData?.name;
+
+  // forecast url
+  const foreCastDataurl = constructUrl(
+    " https://api.openweathermap.org/data/2.5/onecall",
+    {
+      lat: lat,
+      lon: lon,
+      exclude: "minutely, hourly",
+      units: "metric",
+      type: "8109f605d79877f7488a194794a29013",
+    }
+  );
+
+  const forecastData = await fetchData(foreCastDataurl);
   //Use API to fetch current weather data---
   //from the response put all data in an object
   //   get lat and long from weather data API response ....2nd API call
   //   const weatherForecastUrl =
   //render data
+  return {
+    cityName: displayCity,
+    weatherData: forecastData,
+  };
 };
-const renderCurrentData = () => {
+const renderCurrentData = (currentData) => {
   const currentWeatherCard = `<div class="current-weather">
             <h2>
-              Birmingham 20/05/2022 weather icon
+              ${currentData.cityName}
               <img
                 class="bg-light border rounded"
-                src="http://openweathermap.org/img/w/04d.png"
+                src="http://openweathermap.org/img/w/${data.weatherData.current.[0].icon}.png"
                 alt="weather icon"
               />
             </h2>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">Temp:</div>
-              <div class="col-sm-12 col-md-8 p-2">16&deg;c</div>
+              <div class="col-sm-12 col-md-8 p-2">${data.weatherData.current.temp}&deg;c</div>
             </div>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">Wind:</div>
-              <div class="col-sm-12 col-md-8 p-2">10 MPH</div>
+              <div class="col-sm-12 col-md-8 p-2">${data.weatherData.current.wind_speed} MPH</div>
             </div>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">Humidity:</div>
-              <div class="col-sm-12 col-md-8 p-2">0&percent;</div>
+              <div class="col-sm-12 col-md-8 p-2">${data.weatherData.current.humidity}&percent;</div>
             </div>
             <div class="row g-0">
               <div class="col-sm-12 col-md-4 p-2">UV Index:</div>
 
               <div class="col-sm-12 col-md-8 p-2">
-                <span class="bg-success text-white rounded-2"> 1.5</span>
+                <span class="bg-success text-white rounded-2"> ${data.weatherData.current.uvi}</span>
               </div>
             </div>
           </div>`;
@@ -181,18 +243,23 @@ const renderCurrentWeather = (currentWeatherData) => {
 const renderForecastWeather = (forecastWeatherData) => {
   // render forecast weather data and append  each card to the section
 };
-const handleFormSubmit = (event) => {
+const handleFormSubmit = async (event) => {
   event.preventDefault();
-  console.log("hello");
+
   // get city name from input
   const cityName = $("#city-name").val();
-  console.log(cityName);
+
   // if  not empty
   if (cityName) {
-    renderCurrentData();
-    renderForecastData();
+    const weatherData = await renderWeatherData(cityName);
+    // render current data dynamically
+    renderCurrentData(weatherData);
+
+    // render forecast data via jquery
+    renderForecastData(weatherData);
+
     const recentSearches = getFromLocalStorage("recentSearches", []);
-    console.log("recentSearches", recentSearches);
+
     if (!recentSearches.includes(cityName)) {
       recentSearches.push(cityName);
     }
