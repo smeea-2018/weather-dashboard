@@ -126,7 +126,7 @@ const renderCurrentData = (currentData) => {
               ${currentData.cityName}
               <img
                 class="bg-light border rounded"
-                src="http://openweathermap.org/img/w/${data.weatherData.current.[0].icon}.png"
+                src="http://openweathermap.org/img/w/.png"
                 alt="weather icon"
               />
             </h2>
@@ -153,7 +153,9 @@ const renderCurrentData = (currentData) => {
   weatherInfoContainer.append(currentWeatherCard);
 };
 
-const renderForecastData = () => {
+const renderForecastData = (weatherData) => {
+  const createForecastCard = () => {};
+  const forecastCard = data.weatherData.daily.map(createForecastCard);
   const forecastWeatherCard = `<div>
             <h4 class="my-3 fw-bold">5-day Forecast:</h4>
             <div class="d-flex flex-wrap justify-content-between">
@@ -166,7 +168,9 @@ const renderForecastData = () => {
                 />
 
                 <div class="card-body">
-                  <h5 class="card-title">21/05/2022</h5>
+                  <h5 class="card-title">${moment
+                    .unix(value)
+                    .format("MM/DD/YYYY")}</h5>
                   <p class="card-text">Temp:</p>
                   <p class="card-text">Wind:</p>
                   <p class="card-text">Humidity</p>
