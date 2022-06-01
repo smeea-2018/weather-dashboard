@@ -33,7 +33,7 @@ THEN I am again presented with current and future conditions for that city
 
 ## Technologies
 
-HTML, CSS, JavaScript
+HTML, CSS, BootStrap, JavaScript, JQuery
 
 ## Mock-
 
