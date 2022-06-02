@@ -40,7 +40,6 @@ HTML, CSS, BootStrap, JavaScript, JQuery
 The following image shows the web application's appearance and functionality:
 ![The weather dashboard ](./assets/images/weatherdashboardwithnoprevioussearch.JPG)
 ![The weather dashboard displays temperature of London city](./assets/images/weatherdashbaordlondondata.JPG)
-![The weather dashboard displays previous searches](./assets/images/weatherdashboardprevioussearches.JPG)
 
 ## How to run and install the project
 
