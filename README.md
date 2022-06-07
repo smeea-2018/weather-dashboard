@@ -44,3 +44,7 @@ The following image shows the web application's appearance and functionality:
 ## How to run and install the project
 
 To run the project visual studio code, a web browser and git hub account is required. The code can be cloned by using git bash or github desktop.
+
+## Contact Me:
+
+smeeaa131@gmail.com
